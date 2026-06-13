@@ -13,11 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create config.js from secret
-        run: echo "const GROQ_API_KEY = '${{ secrets.GROQ_API_KEY }}';" > config.js
+      - name: Prepare publish directory
+        run: |
+          mkdir -p _site
+          cp index.html style.css script.js _site/
+          echo "const GROQ_API_KEY = '${{ secrets.GROQ_API_KEY }}';" > _site/config.js
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
+          publish_dir: ./_site
