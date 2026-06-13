@@ -1,0 +1,406 @@
+/* Resets default browser spacing and makes sizing consistent across all elements*/
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+/* Font light grey background, dark text, and full page height */
+body { 
+    font-family: 'Segoe UI', sans-serif; 
+    background: #f0f2f5; 
+    color: #1a1a2e; 
+    min-height: 100vh; 
+}
+
+/* Top header bar — dark background, white text, horizontally aligned items */
+.header {
+    background: #1a1a2e; 
+    color: white; 
+    padding: 20px 40px; 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+}
+
+/* Header title size and weight */
+.header h1 {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+/* Sizes the emoji icon in the header */
+.header span {
+    font-size: 1.6rem;
+}
+
+/* Creates a two column layout - left for input, right for output*/
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 24px 40px;
+    max-width:  1400px;
+    margin: 0 auto;
+}
+
+/* Styles each panel as a white card with rounded corners and subtle shadow */
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Styles the section headings inside each card */
+.card h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1a1a2e;
+    border-bottom: 2px solid #f0f2f5;
+    padding-bottom: 12px;
+}
+
+/* Adds space between each form field */
+.form-group {
+    margin-bottom: 16px;
+}
+
+/* Styles labels — small, uppercase, spaced out */
+label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Styles all input fields — full width, rounded, consistent font */
+input, textarea, select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: #1a1a2e;
+    transition: border 0.2s;
+}
+
+/* Highlights the active field with a purple border when clicked */
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #4f46e5;
+}
+
+/* Makes textareas resizable only vertically, with a minimum height */
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Creates a two-column layout for tone and length dropdowns side by side */
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* Lays out the template buttons in a horizontal row that wraps if needed */
+.templates {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+/* Styles template buttons as purple outlined pills */
+.template-btn {
+    padding: 6px 14px;
+    border: 1.5px solid #4f46e5;
+    background: white;
+    color: #4f46e5;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* Fills the template button with purple on hover */
+.template-btn:hover {
+    background: #4f46e5;
+    color: white;
+}
+
+/* Base style for all action buttons — full width, bold text */
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 4px;
+}
+
+/* Purple fill for the main Generate button */
+.btn-primary {
+    background: #4f46e5;
+    color: white;
+}
+
+/* Darker purple on hover */
+.btn-primary:hover {
+    background: #4338ca;
+}
+
+/* Grey style for the Regenerate button */
+.btn-secondary {
+    background: #f0f2f5;
+    color: #1a1a2e;
+    margin-top: 10px;
+}
+
+/* Slightly darker grey on hover */
+.btn-secondary:hover {
+    background: #e2e4e8;
+}
+/* Styles the email output — preserves line breaks, readable line height */
+.output-box {
+    white-space: pre-wrap;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #1a1a2e;
+    min-height: 200px;
+}
+
+/* Styles the placeholder text shown before any email is generated */
+.placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+/* Green style for the Copy to Clipboard button */
+.btn-copy {
+    background: #10b981;
+    color: white;
+    margin-top: 10px;
+}
+
+/* Darker green on hover */
+.btn-copy:hover {
+    background: #059669;
+}
+
+/* Red small text for error messages */
+.error {
+    color: #ef4444;
+    font-size: 0.88rem;
+    margin-top: 8px;
+}
+
+/* Separates the refine section visually from the output */
+.refine-group {
+    margin-top: 16px;
+    border-top: 2px solid #f0f2f5;
+    padding-top: 16px;
+}
+
+/* Styles the loading message while waiting for the API */
+.loader {
+    text-align: center;
+    color: #4f46e5;
+    font-weight: 600;
+    padding: 40px 0;
+}
+
+/* Subject column Styling */
+#subject-group label { 
+    margin-top: 0; 
+}
+
+#subject-output {
+    min-height: unset;
+    padding: 8px 14px;
+}
+
+/* Styles for Loading Spinner */
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.spinner::after {
+    content: '';
+    width: 32px;
+    height: 32px;
+    border: 3px solid #e0e0e0;
+    border-top-color: #4f46e5;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .container { grid-template-columns: 1fr; padding: 16px; }
+}
+
+/* Styling Email history panel */
+#history-panel { 
+    grid-column: 1 / -1; 
+}
+
+.history-entry {
+    padding: 12px 16px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.history-entry:hover { 
+    border-color: #4f46e5; 
+}
+
+.history-entry .entry-purpose { 
+    font-weight: 600; 
+    font-size: 0.9rem; 
+    color: #1a1a2e; 
+}
+
+.history-entry .entry-time { 
+    font-size: 0.8rem; 
+    color: #888; 
+    margin-top: 2px; 
+}
+
+.btn-clear {
+    background: none;
+    border: 1.5px solid #ef4444;
+    color: #ef4444;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    cursor: pointer;
+}
+
+.btn-clear:hover {
+    background: #ef4444; 
+    color: white; 
+}
+
+/* Mode Toggle */
+.mode-toggle {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 8px;
+    border: 1.5px solid #e0e0e0;
+    background: white;
+    color: #555;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mode-btn.active {
+    background: #4f46e5;
+    color: white;
+    border-color: #4f46e5;
+}
+
+/* Progress Bar */
+.progress-bar-wrap {
+    background: #f0f2f5;
+    border-radius: 20px;
+    height: 8px;
+    overflow: hidden;
+    margin-top: 12px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #4f46e5;
+    border-radius: 20px;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+/* Bulk Results */
+#bulk-results-panel { 
+    grid-column: 1 / -1; 
+}
+
+.bulk-item {
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.bulk-item:hover { 
+    border-color: #4f46e5;
+}
+
+.bulk-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.bulk-item-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #1a1a2e;
+}
+
+.bulk-item-subject {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f2f5;
+}
+
+.bulk-item-body {
+    font-size: 0.9rem;
+    color: #1a1a2e;
+    white-space: pre-wrap;
+    line-height: 1.6;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+/* the copy button used inside bulk items */
+
+.btn-copy-small {
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.btn-copy-small:hover {
+    background: #059669;
+}
