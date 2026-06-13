@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Email Generator</title>
+    <script src="config.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="header">
+    <span>✉</span>
+    <h1>AI Email Generator</h1>
+  </div>
+
+  <!--Opens the two column grid container-->
+  <div class="container">
+    <div class="card" id="input-panel"> <!--The left card - input form panel-->
+        <h2>Email Details</h2>
+
+        <!--Mode Toggle-->
+        <div class="mode-toggle">
+            <button class="mode-btn active" id="single-mode-btn" onclick="switchMode('single')">Single Email</button>
+            <button class="mode-btn" id="bulk-mode-btn" onclick="switchMode('bulk')">Bulk Mode</button>
+        </div>
+        
+        <!--Opens the templates buttons row-->
+        <div class="templates">
+            <button class="template-btn" onclick="loadTemplate('interview')">Interview Scheduling</button>
+            <button class="template-btn" onclick="loadTemplate('offer')">Offer Letter Follow-up</button>
+            <button class="template-btn" onclick="loadTemplate('client')">Client Status Update</button>
+        </div>
+
+        <!--Opens the first form group - Email Purpose-->
+        <div class="form-group">
+            <label for="purpose">Email Purpose</label>
+            <input type="text" id="purpose" placeholder="e.g. Interview Scheduling">
+        </div>
+
+        <!--Opens the next form group - Recipient-->
+        <div class="form-group" id="single-recipient">
+            <label for="recipient">Recipient Name & Designation</label>
+            <input type="text" id="recipient" placeholder="e.g. Rahul Sharma, Senior Developer">
+        </div>
+
+        <!--Bulk recipients - shown in bulk mode-->
+        <div class="form-group" id="bulk-recipient" style="display:none">
+            <label for="recipients-bulk">Recipients (one per line)</label>
+            <textarea id="recipients-bulk" placeholder="Arjun Mehta, Senior Developer&#10;Rahul Sharma, Tech Lead&#10;Priya Nair, HR Manager" style="min-height:100px"></textarea>
+        </div>
+
+        <!--Opens next form group key points-->
+        <div class="form-group">
+            <label for="keypoints">Key Points</label>
+            <textarea id="keypoints" placeholder="e.g. Interview on Monday, 11 AM, Microsoft Teams link to follow"></textarea>
+        </div>
+
+        <!--Opens the two column row for Tone and length-->
+        <div class="row">
+            <div class="form-group">
+                <label for="tone">Tone</label>
+                <select id="tone">
+                    <option value="Professional" title="Warm but businesslike">Professional</option>
+                    <option value="Friendly" title="Conversational and approachable">Friendly</option>
+                    <option value="Formal" title="Corporate and polished, no contractions">Formal</option>
+                    <option value="Assertive" title="Direct, confident, action-oriented">Assertive</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="length">Length</label>
+                <select id="length">
+                    <option value="Standard">Standard</option>
+                    <option value="Concise">Concise</option>
+                    <option value="Detailed">Detailed</option>
+                </select>
+            </div>
+
+        </div>
+
+        <!--Empty div - only visible when there's a validation or API error-->
+        <div id="error-msg" class="error"></div>
+        <button class="btn btn-primary" id="generate-btn" onclick="handleGenerate()">Generate Email</button>
+
+    </div>
+
+        <!--Opens the Left card - the output panel-->
+        <div class="card" id="output-panel">
+            <h2>Generated Email</h2>
+
+            <!--The area where email output is displayed-->
+             <!--Subject line output-->
+            <div id="subject-group" style="display:none">
+                <label>Subject Line</label>
+                <div class="output-box" id="subject-output"></div>
+                <button class="btn btn-copy" onclick="copyField('subject-output', this)">Copy Subject</button>
+            </div>
+
+            <!--Email body output-->
+            <div id="body-group" style="margin-top:16px">
+                <div class="output-box placeholder" id="body-output">Generated email will appear here...</div>
+                <button class="btn btn-copy" id="copy-body-btn" onclick="copyField('body-output', this)" style="display:none">Copy Email Body</button>
+            </div>
+            
+            <!--Word Count-->
+             <div id="word-count" style="font-size:0.82rem; color:#888; margin-top:6px;"></div>
+
+            <!--Opens the refine section - hidden until first email in generated-->
+            <div class="refine-group" id="refine-group" style="display: none">
+                <label for="refine">Refine Instruction</label>
+                <input type="text" id="refine" placeholder="e.g. make it shorter, add urgency">
+                <button class="btn btn-secondary" onclick="generateEmail(true)">Regenerate & Refine</button>
+            </div>
+
+        </div>
+
+        <!--Bulk Results Panel-->
+        <div class="card" id="bulk-results-panel" style="display:none">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h2>Bulk Results</h2>
+                <button class="btn-clear" onclick="downloadAll()" id="download-all-btn">Download All</button>
+            </div>
+            <div id="bulk-progress" style="display:none">
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <div id="progress-text" style="font-size:0.82rem; color:#888; margin-top:6px;"></div>
+            </div>
+            <div id="bulk-list"></div>
+        </div>
+
+        <!--Email History Panel-->
+        <div class="card" id="history-panel" style="margin-top:24px; display:none">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h2>Recent Emails</h2>
+                <button class="btn-clear" onclick="clearHistory()">Clear History</button>
+            </div>
+            <div id="history-list"></div>
+        </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
