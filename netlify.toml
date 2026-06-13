@@ -1,0 +1,3 @@
+[build]
+  command = "echo \"const GROQ_API_KEY = '$GROQ_API_KEY';\" > config.js"
+  publish = "."
